@@ -8,7 +8,7 @@ def app(environ, start_response):
         password="password"
     )
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users;")
+    cursor.execute("SELECT * FROM orders;")
     items = cursor.fetchall()
     cursor.close()
     conn.close()
