@@ -40,10 +40,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
-          source: |
-            backend.tar
-            nginx.tar
-            docker-compose.yml
+          source: "backend.tar nginx.tar docker-compose.yml"
           target: /opt/webapp
 
       - name: Connect to VPS and deploy
