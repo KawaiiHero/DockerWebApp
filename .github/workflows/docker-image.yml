@@ -39,5 +39,5 @@ jobs:
             git pull origin main
             docker pull ${{secrets.DOCKER_USERNAME}}/nginx:latest
             docker pull ${{secrets.DOCKER_USERNAME}}/backend:latest
-            docker-compose down
-            docker-compose up -d
+            docker compose down
+            docker compose up -d
