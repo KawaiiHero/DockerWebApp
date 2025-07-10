@@ -1,7 +1,6 @@
 import psycopg2
 
 def app(environ, start_response):
-    # Подключение к PostgreSQL
     conn = psycopg2.connect(
         host="db",
         database="mydb",
