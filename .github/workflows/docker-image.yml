@@ -22,7 +22,7 @@ jobs:
       - name: Build nginx image
         run: docker build -t nginx:latest ./nginx
 
-      - name: Login to Docker registry (если нужно)
+      - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
            username: ${{ secrets.DOCKER_USERNAME }}
@@ -39,12 +39,11 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_SSH_KEY }}
           source: |
             backend.tar
             nginx.tar
             docker-compose.yml
-            ansible/
           target: /home/${{ secrets.VPS_USER }}/deploy/
 
       - name: Connect to VPS and deploy
@@ -52,9 +51,9 @@ jobs:
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          password: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.VPS_USER }}/deploy
+            cd /opt/webapp
             docker load -i backend.tar
             docker load -i nginx.tar
             docker-compose down
